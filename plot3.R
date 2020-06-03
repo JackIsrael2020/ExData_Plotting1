@@ -8,15 +8,12 @@ colnames(Data) <- c("Date", "Time", "Global_active_power", "Global_reactive_powe
                     "Global_intensity", "Sub_metering_1", "Sub_metering_2", "Sub_metering_3")
 Data$Date <- as.Date(Data$Date, format = "%d/%m/%Y")
 ##... TO HERE.
-
+png("plot3.png")
 datetime <- as.POSIXct(paste(Data$Date, Data$Time), format="%Y-%m-%d %H:%M:%S")
 plot.new()
 with(Data, plot(datetime, Sub_metering_1, type="l", xlab = "",  ylab="Energy sub metering"))
 with(Data, lines(datetime, Sub_metering_2, col="orange"))
 with(Data, lines(datetime, Sub_metering_3, col="blue"))
-
 legend("topright", col=c("black", "orange", "blue"),
        lty=1, legend =c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
-
-dev.copy(png, file = "plot3.png")
 dev.off()
