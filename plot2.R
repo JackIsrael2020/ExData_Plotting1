@@ -8,10 +8,9 @@ colnames(Data) <- c("Date", "Time", "Global_active_power", "Global_reactive_powe
                     "Global_intensity", "Sub_metering_1", "Sub_metering_2", "Sub_metering_3")
 Data$Date <- as.Date(Data$Date, format = "%d/%m/%Y")
 ##... TO HERE.
-
+png("plot2.png")
 datetime <- as.POSIXct(paste(Data$Date, Data$Time), format="%Y-%m-%d %H:%M:%S")
 plot.new()
 with(Data, plot(datetime, Global_active_power, type="l",
                 xlab = "",  ylab="Global Active Power (kilowatts)"))
-dev.copy(png, file = "plot2.png")
 dev.off()
